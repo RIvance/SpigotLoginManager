@@ -12,6 +12,12 @@ public enum LoginCommand implements PlayerCommandInterface {
     public boolean execute(@NotNull Player player, String[] args) {
         if (args.length == 1) {
             try {
+                if (Players.isPlayerLoggedIn(player)) {
+                    String message = Message.error("You are already logged in, don't login again");
+                    player.sendMessage(message);
+                    return false;
+                }
+
                 if (Players.checkPin(player, Integer.parseInt(args[0]))) {
                     Players.restorePlayerState(player);
                     player.setOp(false);

@@ -2,6 +2,9 @@ package cc.nodev;
 
 import cc.nodev.command.CommandInterface;
 import cc.nodev.command.PlayerCommandInterface;
+import cc.nodev.command.op.OpLoginCommand;
+import cc.nodev.command.player.LoginCommand;
+import cc.nodev.command.player.LogoutCommand;
 import cc.nodev.event.JoinListener;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -34,7 +37,9 @@ public class PlugMain extends JavaPlugin {
     }
 
     private void initCommands() {
-
+        setPlayerCommand("login", LoginCommand.INSTANCE);
+        setPlayerCommand("oplogin", OpLoginCommand.INSTANCE);
+        setPlayerCommand("logout", LogoutCommand.INSTANCE);
     }
 
     @Override

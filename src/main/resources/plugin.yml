@@ -1,3 +1,14 @@
-name: NodevSpigotManager
+name: NodevServerManager
 main: cc.nodev.PlugMain
 version: 1.0
+author: Ivance
+commands:
+  login:
+    description: Login command
+    usage: /login <Pin>
+  oplogin:
+    description: Op login command
+    usage: /oplogin <Pin>
+  logout:
+    description: Logout command
+    usage: /logout

@@ -5,10 +5,10 @@ import org.bukkit.entity.Player;
 
 public class Message {
 
-    public static final String ERROR   = ChatColor.RED       + "[Error]";
-    public static final String INFO    = ChatColor.GRAY      + "[Info]";
-    public static final String WARNING = ChatColor.GOLD      + "[Warning]";
-    public static final String DEBUG   = ChatColor.DARK_GRAY + "[Debug]";
+    public static final String ERROR   = ChatColor.RED       + "[Error]"   + ChatColor.GREEN;
+    public static final String INFO    = ChatColor.GRAY      + "[Info]"    + ChatColor.GREEN;
+    public static final String WARNING = ChatColor.GOLD      + "[Warning]" + ChatColor.GREEN;
+    public static final String DEBUG   = ChatColor.DARK_GRAY + "[Debug]"   + ChatColor.GREEN;
 
     public static String generate(String format, Object ... objects) {
         for (Object obj : objects) {

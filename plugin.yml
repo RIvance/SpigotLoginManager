@@ -1,5 +1,0 @@
-name: NodevPlug
-main: cc.nodev.NodevPlugMain
-version: 1.0
-author: Ivance
-commands:

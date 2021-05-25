@@ -10,13 +10,19 @@ public enum OpLoginCommand implements PlayerCommandInterface {
     INSTANCE;
     @Override
     public boolean execute(@NotNull Player player, String[] args) {
-        if (!player.isOp()) {
+        if (!Players.isOp(player)) {
             String message = Message.error("Only op can use this command");
             player.sendMessage(message);
             return false;
         }
 
         if (args.length == 1) {
+            if (Players.isPlayerLoggedIn(player)) {
+                String message = Message.error("You are already logged in, don't login again");
+                player.sendMessage(message);
+                return false;
+            }
+
             try {
                 if (Players.checkPin(player, Integer.parseInt(args[0]))) {
                     Players.restorePlayerState(player);

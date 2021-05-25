@@ -2,10 +2,14 @@ package cc.nodev.core;
 
 import org.bukkit.entity.Player;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public enum Players {
     INSTANCE;
 
     private final PlayerDataSession dataSession = new DemoSession();
+    private final Map<Player, Boolean> loginCondition = new HashMap<>();
 
     public static void restorePlayerState(Player player) {
         player.setGameMode(INSTANCE.dataSession.getGameMode(player));
@@ -33,5 +37,21 @@ public enum Players {
 
     public static boolean checkPin(Player player, int pin) {
         return INSTANCE.dataSession.checkPin(player, pin);
+    }
+
+    public static void login(Player player) {
+        INSTANCE.loginCondition.put(player, true);
+    }
+
+    public static void logout(Player player) {
+        INSTANCE.loginCondition.put(player, false);
+    }
+
+    public static boolean isPlayerLoggedIn(Player player) {
+        if (!INSTANCE.loginCondition.containsKey(player)) {
+            INSTANCE.loginCondition.put(player, false);
+            return false;
+        }
+        return INSTANCE.loginCondition.get(player);
     }
 }
