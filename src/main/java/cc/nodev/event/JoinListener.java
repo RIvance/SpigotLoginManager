@@ -21,7 +21,7 @@ public class JoinListener implements Listener {
         String subtitle = ChatColor.GREEN + "https://nodev.cc/minecraft";
         player.sendTitle(title, subtitle, 10, 75, 15);
 
-        String message = Message.info("Welcome to {nodev}, {player}", ChatColor.AQUA + "NodevCraft", player);
+        String message = Message.info("Welcome to {nodev}, {player}", ChatColor.AQUA + "Nodev::Craft", player);
         player.sendMessage(message);
         message = Message.info("Please use `/login` command to login");
         player.sendMessage(message);
