@@ -12,16 +12,17 @@ public enum ServerCommand implements PlayerCommandInterface {
         if (!player.isOp()) {
             String message = Message.error("Only op can use this command");
             player.sendMessage(message);
+            return true;
         }
 
         try {
             switch (args[0]) {
                 case "restart":
                     player.getServer().reload();
-                    break;
+                    return true;
                 case "stop":
                     player.getServer().shutdown();
-                    break;
+                    return true;
                 default:
                     break;
             }
@@ -29,6 +30,7 @@ public enum ServerCommand implements PlayerCommandInterface {
         catch (IndexOutOfBoundsException exception) {
             String message = Message.error("Invalid number of arguments");
             player.sendMessage(message);
+            return false;
         }
 
         return false;

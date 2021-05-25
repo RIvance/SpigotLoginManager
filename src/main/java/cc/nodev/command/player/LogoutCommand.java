@@ -14,7 +14,7 @@ public enum LogoutCommand implements PlayerCommandInterface {
         if (!Players.isPlayerLoggedIn(player)) {
             String message = Message.error("You are already logged out, don't logout again");
             player.sendMessage(message);
-            return false;
+            return true;
         }
 
         Players.updateSession(player);
