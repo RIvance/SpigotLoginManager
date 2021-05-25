@@ -1,38 +1,35 @@
 package cc.nodev.utils;
 
+import org.bukkit.Bukkit;
+import org.bukkit.GameMode;
+import org.bukkit.Location;
 import org.bukkit.entity.Player;
-
-import java.util.Properties;
 
 public enum DataBaseSession {
     INSTANCE;
 
-    private String address;
-    private String password;
+    private final String address;
+    private final String password;
 
-    private DataBaseSession() {
-
+    DataBaseSession() {
+        address = "";
+        password = "";
     }
 
-    private DataBaseSession(String address, String password) {
-        Properties databaseProperties = new Properties();
-        //databaseProperties.load();
-    }
-
-    public boolean checkPlayerExists(Player player) {
+    public static boolean checkPlayerExists(Player player) {
         return false;
     }
 
-    public void registerPlayer(Player player, String password) {
+    public static void registerPlayer(Player player, String password) {
 
     }
 
-    public boolean checkPassword(Player player, String password) {
+    public static boolean checkPassword(Player player, String password) {
         return false;
     }
 
-    public PlayerData getPlayerData(String player) {
-        return null;
+    public static PlayerData getPlayerData(String playerName) {
+        return new PlayerData(playerName, GameMode.CREATIVE, null);
     }
 
     public PlayerData getPlayerData(Player player) {
