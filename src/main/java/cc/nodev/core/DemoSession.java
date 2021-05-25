@@ -13,7 +13,7 @@ import java.util.Map;
 public class DemoSession extends ConfigFileSession {
 
     final List<String> opList = Arrays.asList(
-        "Ivance", "AnnaGreen"
+        "Ivance", "AnnaGream"
     );
 
     final Map<Player, PlayerData> playerMap = new HashMap<>();
