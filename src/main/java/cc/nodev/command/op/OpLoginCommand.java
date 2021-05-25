@@ -27,6 +27,7 @@ public enum OpLoginCommand implements PlayerCommandInterface {
                 if (Players.checkPin(player, Integer.parseInt(args[0]))) {
                     Players.restorePlayerState(player);
                     player.setOp(true);
+                    Players.login(player);
                     String message = Message.info("Welcome back, {player}!", player);
                     player.sendMessage(message);
                     return true;
