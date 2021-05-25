@@ -5,7 +5,7 @@ import org.bukkit.entity.Player;
 public enum Players {
     INSTANCE;
 
-    private final PlayerDataSession dataSession = new ConfigFileSession();
+    private final PlayerDataSession dataSession = new DemoSession();
 
     public static void restorePlayerState(Player player) {
         player.setGameMode(INSTANCE.dataSession.getGameMode(player));

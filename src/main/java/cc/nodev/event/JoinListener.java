@@ -1,6 +1,6 @@
 package cc.nodev.event;
 
-import cc.nodev.utils.Message;
+import cc.nodev.core.Players;
 import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
@@ -12,8 +12,9 @@ public class JoinListener implements Listener {
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent event) {
         Player player = event.getPlayer();
-        //player.setOp(false);
-        //player.setGameMode(GameMode.SPECTATOR);
+        Players.updateSession(player);
+        player.setOp(false);
+        player.setGameMode(GameMode.SPECTATOR);
 
         String title = ChatColor.AQUA + "Nodev" + ChatColor.WHITE + "::" + ChatColor.GOLD + "Craft";
         String subtitle = ChatColor.GREEN + "https://nodev.cc/minecraft";

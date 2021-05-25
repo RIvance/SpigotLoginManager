@@ -38,17 +38,17 @@ public class ConfigFileSession implements PlayerDataSession {
 
     @Override
     public GameMode getGameMode(Player player) {
-        return null;
+        return player.getGameMode();
     }
 
     @Override
     public Location getLastLocation(Player player) {
-        return null;
+        return player.getLocation();
     }
 
     @Override
     public Location getSpawnLocation(Player player) {
-        return null;
+        return player.getBedSpawnLocation();
     }
 
     @Override
