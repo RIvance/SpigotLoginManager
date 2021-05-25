@@ -20,6 +20,7 @@ public enum LogoutCommand implements PlayerCommandInterface {
         Players.updateSession(player);
         player.setOp(false);
         player.setGameMode(GameMode.SPECTATOR);
+        Players.logout(player);
         String message = Message.info("You have logged out, use `/login` to login");
         player.sendMessage(message);
         return true;
