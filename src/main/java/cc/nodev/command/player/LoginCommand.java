@@ -15,7 +15,7 @@ public enum LoginCommand implements PlayerCommandInterface {
                 if (Players.isPlayerLoggedIn(player)) {
                     String message = Message.error("You are already logged in, don't login again");
                     player.sendMessage(message);
-                    return false;
+                    return true;
                 }
 
                 if (Players.checkPin(player, Integer.parseInt(args[0]))) {
@@ -24,13 +24,12 @@ public enum LoginCommand implements PlayerCommandInterface {
                     Players.login(player);
                     String message = Message.info("Welcome back, {player}!", player);
                     player.sendMessage(message);
-                    return true;
                 }
                 else {
                     String message = Message.error("Pin number is incorrect");
                     player.sendMessage(message);
-                    return false;
                 }
+                return true;
             }
             catch (NumberFormatException exception) {
                 String message = Message.error("Pin number must be an integer");
