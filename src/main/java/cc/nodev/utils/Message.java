@@ -3,6 +3,7 @@ package cc.nodev.utils;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
+@SuppressWarnings("unused")
 public class Message {
 
     public static final String ERROR   = ChatColor.RED       + "[Error]"   + ChatColor.GREEN;

@@ -8,12 +8,12 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.event.player.PlayerQuitEvent;
 
 public class JoinListener implements Listener {
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent event) {
         Player player = event.getPlayer();
-        Players.updateSession(player);
         player.setOp(false);
         player.setGameMode(GameMode.SPECTATOR);
 
@@ -25,5 +25,13 @@ public class JoinListener implements Listener {
         player.sendMessage(message);
         message = Message.info("Please use `/login` command to login");
         player.sendMessage(message);
+    }
+
+    @EventHandler
+    public void onPlayerExit(PlayerQuitEvent event) {
+        Player player = event.getPlayer();
+        if (Players.isPlayerLoggedIn(player)) {
+            Players.updateSession(player);
+        }
     }
 }

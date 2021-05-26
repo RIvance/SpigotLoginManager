@@ -4,6 +4,7 @@ import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
+@SuppressWarnings("unused")
 public interface PlayerDataSession {
     void setOp(Player player, boolean isOp);
     void updateLastLocation(Player player);
@@ -16,4 +17,6 @@ public interface PlayerDataSession {
     Location getSpawnLocation(Player player);
     void newPlayer(Player player, int pin);
     boolean checkPin(Player player, int pin);
+    default void playerLeave(Player player) { }
+    default void trySaveData(Player player) throws Exception { }
 }
