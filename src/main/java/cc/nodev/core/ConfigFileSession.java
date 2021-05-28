@@ -12,11 +12,13 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
+import static cc.nodev.utils.ConfigHandler.NullObject;
+
 public class ConfigFileSession implements PlayerDataSession {
 
     Map<Player, ConfigHandler> playerConfigs = new HashMap<>();
     
-    private void checkNewPlayer(Player player) {
+    private void configFileCheck(Player player) {
         if (!playerConfigs.containsKey(player)) {
             try {
                 String path = "players/" + player.getName() + ".yml";
@@ -29,12 +31,12 @@ public class ConfigFileSession implements PlayerDataSession {
     }
 
     private ConfigHandler getConfig(Player player) {
+        configFileCheck(player);
         return playerConfigs.get(player);
     }
 
     @Override
     public void setOp(Player player, boolean isOp) {
-        checkNewPlayer(player);
         getConfig(player).item("op").setValue(true);
     }
 
@@ -55,23 +57,29 @@ public class ConfigFileSession implements PlayerDataSession {
         coordNode.item("z").setValue(location.getZ());
     }
 
-    private Location loadLocation(ConfigHandler.Node locationNode) {
-        String world = locationNode.item("world").getValue();
+    private Location loadLocation(ConfigHandler.Node locationNode) throws ClassCastException {
+        String world = (String) locationNode.item("world").getValue();
 
         ConfigHandler.Node coordNode = locationNode.item("coord");
-        double x = Double.parseDouble(coordNode.item("x").getValue());
-        double y = Double.parseDouble(coordNode.item("y").getValue());
-        double z = Double.parseDouble(coordNode.item("z").getValue());
+        Double x = (Double) coordNode.item("x").getValue();
+        Double y = (Double) coordNode.item("y").getValue();
+        Double z = (Double) coordNode.item("z").getValue();
 
         Location location = new Location(Bukkit.getWorld(world), x, y, z);
-        location.setYaw(Float.parseFloat(locationNode.item("yaw").getValue()));
-        location.setPitch(Float.parseFloat(locationNode.item("pitch").getValue()));
+
+        Double yaw = (Double) locationNode.item("yaw").getValue();
+        Double pitch = (Double) locationNode.item("pitch").getValue();
+
+        location.setYaw(yaw.floatValue());
+        location.setPitch(pitch.floatValue());
+
+        System.out.println("yaw pitch pass");
 
         Vector direction = new Vector();
         ConfigHandler.Node directionNode = locationNode.item("direction");
-        direction.setX(Double.parseDouble(directionNode.item("x").getValue()));
-        direction.setY(Double.parseDouble(directionNode.item("y").getValue()));
-        direction.setZ(Double.parseDouble(directionNode.item("z").getValue()));
+        direction.setX((Double) directionNode.item("x").getValue());
+        direction.setY((Double) directionNode.item("y").getValue());
+        direction.setZ((Double) directionNode.item("z").getValue());
         location.setDirection(direction);
 
         return location;
@@ -79,7 +87,6 @@ public class ConfigFileSession implements PlayerDataSession {
 
     @Override
     public void updateLastLocation(Player player) {
-        checkNewPlayer(player);
         ConfigHandler.Node locationNode = getConfig(player).item("location");
         Location location = player.getLocation();
         saveLocation(locationNode, location);
@@ -87,7 +94,6 @@ public class ConfigFileSession implements PlayerDataSession {
 
     @Override
     public void updateSpawnLocation(Player player) {
-        checkNewPlayer(player);
         ConfigHandler.Node spawnNode = getConfig(player).item("spawn");
         Location location = player.getLocation();
         saveLocation(spawnNode, location);
@@ -101,39 +107,66 @@ public class ConfigFileSession implements PlayerDataSession {
 
     @Override
     public boolean isNew(Player player) {
-        return getConfig(player).item("pin").getValue().isEmpty();
+        return getConfig(player).item("pin").getValue() == NullObject;
     }
 
     @Override
     public boolean isOp(Player player) {
-        return false;
+        try {
+            return (Boolean) getConfig(player).item("op").getValue();
+        } catch (ClassCastException exception) {
+            return false;
+        }
     }
 
     @Override
     @SuppressWarnings("deprecation")
     public GameMode getGameMode(Player player) {
-        int gamemode = Integer.parseInt(playerConfigs.get(player).item("gamemode").getValue());
-        return GameMode.getByValue(gamemode);
+        try {
+            Integer gamemode = (Integer) getConfig(player).item("gamemode").getValue();
+            return GameMode.getByValue(gamemode);
+        } catch (ClassCastException exception) {
+            return player.getGameMode();
+        }
     }
 
     @Override
     public Location getLastLocation(Player player) {
-        return loadLocation(getConfig(player).item("location"));
+        try {
+            return loadLocation(getConfig(player).item("location"));
+        } catch (ClassCastException exception) {
+            return player.getLocation();
+        }
     }
 
     @Override
     public Location getSpawnLocation(Player player) {
-        return loadLocation(getConfig(player).item("spawn"));
+        try {
+            return loadLocation(getConfig(player).item("spawn"));
+        } catch (ClassCastException exception) {
+            return player.getBedSpawnLocation();
+        }
     }
 
     @Override
     public void newPlayer(Player player, int pin) {
-        getConfig(player).item("pin").setValue(String.valueOf(pin));
+        getConfig(player).item("pin").setValue(pin);
+        getConfig(player).item("op").setValue(false);
+        getConfig(player).item("gamemode").setValue(0);
     }
 
     @Override
     public boolean checkPin(Player player, int pin) {
-        // TODO
-        return false;
+        try {
+            Integer pinData = (Integer) getConfig(player).item("pin").getValue();
+            return pin == pinData;
+        } catch (ClassCastException exception) {
+            return false;
+        }
+    }
+
+    @Override
+    public void trySaveData(Player player) throws IOException {
+        getConfig(player).getRoot().saveFile();
     }
 }

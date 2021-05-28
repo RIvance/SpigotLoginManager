@@ -3,6 +3,7 @@ package cc.nodev.command.op;
 import cc.nodev.command.PlayerCommandInterface;
 import cc.nodev.core.Players;
 import cc.nodev.utils.Message;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
@@ -28,7 +29,11 @@ public enum OpLoginCommand implements PlayerCommandInterface {
                     Players.restorePlayerState(player);
                     player.setOp(true);
                     Players.login(player);
-                    String message = Message.info("Welcome back, {player}!", player);
+
+                    String message = Message.info("{player} is logged in", player);
+                    Bukkit.broadcastMessage(message);
+
+                    message = Message.info("Welcome back, {player}!", player);
                     player.sendMessage(message);
                 }
                 else {

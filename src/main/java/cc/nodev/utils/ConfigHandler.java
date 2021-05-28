@@ -3,12 +3,15 @@ package cc.nodev.utils;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.io.File;
 import java.io.IOException;
 
 @SuppressWarnings("unused")
 public class ConfigHandler {
+
+    public static final Object NullObject = new Object();
 
     public static class Node {
         private final YamlConfiguration config;
@@ -22,13 +25,13 @@ public class ConfigHandler {
         }
 
         @NotNull
-        public String getValue() {
-            String value = (String) config.get(path);
-            return value == null ? "" : value;
+        public Object getValue() {
+            Object value = config.get(path);
+            return value == null ? NullObject : value;
         }
 
         public void setValue(@NotNull Object value) {
-            config.set(path, value.toString());
+            config.set(path, value);
         }
 
         public Node item(@NotNull String node) {

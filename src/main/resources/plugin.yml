@@ -3,6 +3,9 @@ main: cc.nodev.PlugMain
 version: 1.0
 author: Ivance
 commands:
+  register:
+    description: Register command
+    usage: /register <Pin>
   login:
     description: Login command
     usage: /login <Pin>

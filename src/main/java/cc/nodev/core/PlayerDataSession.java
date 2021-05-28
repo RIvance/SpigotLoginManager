@@ -4,6 +4,8 @@ import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
+import java.io.IOException;
+
 @SuppressWarnings("unused")
 public interface PlayerDataSession {
     void setOp(Player player, boolean isOp);
@@ -18,5 +20,5 @@ public interface PlayerDataSession {
     void newPlayer(Player player, int pin);
     boolean checkPin(Player player, int pin);
     default void playerLeave(Player player) { }
-    default void trySaveData(Player player) throws Exception { }
+    default void trySaveData(Player player) throws IOException { }
 }

@@ -11,7 +11,9 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 
 public class JoinListener implements Listener {
+
     @EventHandler
+    @SuppressWarnings("unused")
     public void onPlayerJoin(PlayerJoinEvent event) {
         Player player = event.getPlayer();
         player.setOp(false);
@@ -23,15 +25,22 @@ public class JoinListener implements Listener {
 
         String message = Message.info("Welcome to {nodev}, {player}", ChatColor.AQUA + "Nodev::Craft", player);
         player.sendMessage(message);
-        message = Message.info("Please use `/login` command to login");
+
+        if (Players.isNewPlayer(player)) {
+            message = Message.info("Please use `/register` command to register");
+        } else {
+            message = Message.info("Please use `/login` command to login");
+        }
         player.sendMessage(message);
     }
 
     @EventHandler
+    @SuppressWarnings("unused")
     public void onPlayerExit(PlayerQuitEvent event) {
         Player player = event.getPlayer();
         if (Players.isPlayerLoggedIn(player)) {
             Players.updateSession(player);
+            Players.saveData(player);
         }
     }
 }

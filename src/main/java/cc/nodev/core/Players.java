@@ -8,7 +8,7 @@ import java.util.Map;
 public enum Players {
     INSTANCE;
 
-    private final PlayerDataSession dataSession = new DemoSession();
+    private final PlayerDataSession dataSession = new ConfigFileSession();
     private final Map<Player, Boolean> loginCondition = new HashMap<>();
 
     public static void restorePlayerState(Player player) {
@@ -23,6 +23,10 @@ public enum Players {
         INSTANCE.dataSession.updateSpawnLocation(player);
     }
 
+    public static boolean isNewPlayer(Player player) {
+        return INSTANCE.dataSession.isNew(player);
+    }
+
     public static void setOp(Player player) {
         INSTANCE.dataSession.setOp(player, true);
     }
@@ -33,6 +37,10 @@ public enum Players {
 
     public static boolean isOp(Player player) {
         return INSTANCE.dataSession.isOp(player);
+    }
+
+    public static void register(Player player, int pin) {
+        INSTANCE.dataSession.newPlayer(player, pin);
     }
 
     public static boolean checkPin(Player player, int pin) {
@@ -53,5 +61,14 @@ public enum Players {
             return false;
         }
         return INSTANCE.loginCondition.get(player);
+    }
+
+    public static void saveData(Player player) {
+        try {
+            INSTANCE.dataSession.trySaveData(player);
+        }
+        catch (Exception exception) {
+            System.err.println("Cannot save data of player " + player.getName());
+        }
     }
 }

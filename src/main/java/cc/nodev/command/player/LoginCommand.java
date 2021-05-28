@@ -3,6 +3,7 @@ package cc.nodev.command.player;
 import cc.nodev.command.PlayerCommandInterface;
 import cc.nodev.core.Players;
 import cc.nodev.utils.Message;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
@@ -13,7 +14,7 @@ public enum LoginCommand implements PlayerCommandInterface {
         if (args.length == 1) {
             try {
                 if (Players.isPlayerLoggedIn(player)) {
-                    String message = Message.error("You are already logged in, don't login again");
+                    String message = Message.error("You have already logged in, don't login again");
                     player.sendMessage(message);
                     return true;
                 }
@@ -22,7 +23,11 @@ public enum LoginCommand implements PlayerCommandInterface {
                     Players.restorePlayerState(player);
                     player.setOp(false);
                     Players.login(player);
-                    String message = Message.info("Welcome back, {player}!", player);
+
+                    String message = Message.info("{player} is logged in", player);
+                    Bukkit.broadcastMessage(message);
+
+                    message = Message.info("Welcome back, {player}!", player);
                     player.sendMessage(message);
                 }
                 else {

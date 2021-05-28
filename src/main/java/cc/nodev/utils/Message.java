@@ -6,10 +6,10 @@ import org.bukkit.entity.Player;
 @SuppressWarnings("unused")
 public class Message {
 
-    public static final String ERROR   = ChatColor.RED       + "[Error]"   + ChatColor.GREEN;
-    public static final String INFO    = ChatColor.GRAY      + "[Info]"    + ChatColor.GREEN;
-    public static final String WARNING = ChatColor.GOLD      + "[Warning]" + ChatColor.GREEN;
-    public static final String DEBUG   = ChatColor.DARK_GRAY + "[Debug]"   + ChatColor.GREEN;
+    public static final String ERROR   = ChatColor.RED   + "[Error]"   + ChatColor.GREEN;
+    public static final String INFO    = ChatColor.AQUA  + "[Info]"    + ChatColor.GREEN;
+    public static final String WARNING = ChatColor.GOLD  + "[Warning]" + ChatColor.GREEN;
+    public static final String DEBUG   = ChatColor.WHITE + "[Debug]"   + ChatColor.GREEN;
 
     public static String generate(String format, Object ... objects) {
         for (Object obj : objects) {
@@ -17,7 +17,7 @@ public class Message {
             if (obj instanceof String) {
                 str = (String) obj + ChatColor.GREEN;
             } else if (obj instanceof Player) {
-                str = ChatColor.YELLOW + ((Player) obj).getName() + ChatColor.GREEN;
+                str = playerName( ((Player) obj).getName() ) + ChatColor.GREEN;
             } else {
                 str = "";
             }
@@ -43,6 +43,6 @@ public class Message {
     }
 
     public static String playerName(String playerName) {
-        return ChatColor.YELLOW + playerName;
+        return ChatColor.YELLOW + "" + ChatColor.ITALIC + playerName + ChatColor.RESET;
     }
 }

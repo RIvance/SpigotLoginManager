@@ -5,6 +5,7 @@ import cc.nodev.command.PlayerCommandInterface;
 import cc.nodev.command.op.OpLoginCommand;
 import cc.nodev.command.player.LoginCommand;
 import cc.nodev.command.player.LogoutCommand;
+import cc.nodev.command.player.RegisterCommand;
 import cc.nodev.event.JoinListener;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -15,6 +16,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Objects;
 
+@SuppressWarnings("unused")
 public class PlugMain extends JavaPlugin {
 
     public void setCommand(@NotNull String commandLabel, final CommandInterface commandImpl) {
@@ -37,6 +39,7 @@ public class PlugMain extends JavaPlugin {
     }
 
     private void initCommands() {
+        setPlayerCommand("register", RegisterCommand.INSTANCE);
         setPlayerCommand("login", LoginCommand.INSTANCE);
         setPlayerCommand("oplogin", OpLoginCommand.INSTANCE);
         setPlayerCommand("logout", LogoutCommand.INSTANCE);
