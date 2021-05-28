@@ -18,7 +18,7 @@ public enum LogoutCommand implements PlayerCommandInterface {
             return true;
         }
 
-        Players.updateSession(player);
+        Players.savePlayerState(player);
         Players.saveData(player);
         player.setOp(false);
         player.setGameMode(GameMode.SPECTATOR);

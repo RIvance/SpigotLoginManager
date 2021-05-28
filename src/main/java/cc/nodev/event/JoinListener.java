@@ -21,9 +21,9 @@ public class JoinListener implements Listener {
 
         String title = ChatColor.AQUA + "Nodev" + ChatColor.WHITE + "::" + ChatColor.GOLD + "Craft";
         String subtitle = ChatColor.GREEN + "https://nodev.cc/minecraft";
-        player.sendTitle(title, subtitle, 10, 75, 15);
+        player.sendTitle(title, subtitle, 10, 100, 15);
 
-        String message = Message.info("Welcome to {nodev}, {player}", ChatColor.AQUA + "Nodev::Craft", player);
+        String message = Message.info("Welcome to {nodev}, {player}", title, player);
         player.sendMessage(message);
 
         if (Players.isNewPlayer(player)) {
@@ -39,7 +39,7 @@ public class JoinListener implements Listener {
     public void onPlayerExit(PlayerQuitEvent event) {
         Player player = event.getPlayer();
         if (Players.isPlayerLoggedIn(player)) {
-            Players.updateSession(player);
+            Players.savePlayerState(player);
             Players.saveData(player);
         }
     }

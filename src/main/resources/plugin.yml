@@ -6,12 +6,20 @@ commands:
   register:
     description: Register command
     usage: /register <Pin>
+    aliases: [reg]
   login:
     description: Login command
     usage: /login <Pin>
+    aliases: [join]
   oplogin:
     description: Op login command
     usage: /oplogin <Pin>
+    aliases: [opjoin]
   logout:
     description: Logout command
     usage: /logout
+    aliases: [leave, sep]
+  setop:
+    description: Set server op
+    usage: /setop <Player> (optional)[true|false]
+    permission: op

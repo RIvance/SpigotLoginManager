@@ -21,4 +21,5 @@ public interface PlayerDataSession {
     boolean checkPin(Player player, int pin);
     default void playerLeave(Player player) { }
     default void trySaveData(Player player) throws IOException { }
+    default void reloadData() { }
 }

@@ -17,7 +17,7 @@ public enum Players {
         player.setBedSpawnLocation(INSTANCE.dataSession.getSpawnLocation(player));
     }
 
-    public static void updateSession(Player player) {
+    public static void savePlayerState(Player player) {
         INSTANCE.dataSession.updateGameMode(player);
         INSTANCE.dataSession.updateLastLocation(player);
         INSTANCE.dataSession.updateSpawnLocation(player);

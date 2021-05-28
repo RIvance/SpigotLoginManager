@@ -1,4 +1,4 @@
-package cc.nodev.command.op;
+package cc.nodev.command.player;
 
 import cc.nodev.command.PlayerCommandInterface;
 import cc.nodev.core.Players;

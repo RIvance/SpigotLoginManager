@@ -2,7 +2,8 @@ package cc.nodev;
 
 import cc.nodev.command.CommandInterface;
 import cc.nodev.command.PlayerCommandInterface;
-import cc.nodev.command.op.OpLoginCommand;
+import cc.nodev.command.op.SetOpCommand;
+import cc.nodev.command.player.OpLoginCommand;
 import cc.nodev.command.player.LoginCommand;
 import cc.nodev.command.player.LogoutCommand;
 import cc.nodev.command.player.RegisterCommand;
@@ -18,6 +19,8 @@ import java.util.Objects;
 
 @SuppressWarnings("unused")
 public class PlugMain extends JavaPlugin {
+
+    public static final String NAME = "NodevServerManager";
 
     public void setCommand(@NotNull String commandLabel, final CommandInterface commandImpl) {
         Objects.requireNonNull(this.getCommand(commandLabel)).setExecutor(new CommandExecutor() {
@@ -39,10 +42,13 @@ public class PlugMain extends JavaPlugin {
     }
 
     private void initCommands() {
+        // Non-Op Commands
         setPlayerCommand("register", RegisterCommand.INSTANCE);
-        setPlayerCommand("login", LoginCommand.INSTANCE);
-        setPlayerCommand("oplogin", OpLoginCommand.INSTANCE);
-        setPlayerCommand("logout", LogoutCommand.INSTANCE);
+        setPlayerCommand("login",    LoginCommand.INSTANCE);
+        setPlayerCommand("oplogin",  OpLoginCommand.INSTANCE);
+        setPlayerCommand("logout",   LogoutCommand.INSTANCE);
+        // Op Commands
+        setPlayerCommand("setop",    SetOpCommand.INSTANCE);
     }
 
     @Override

@@ -67,13 +67,11 @@ public class ConfigFileSession implements PlayerDataSession {
 
         Location location = new Location(Bukkit.getWorld(world), x, y, z);
 
-        Double yaw = (Double) locationNode.item("yaw").getValue();
-        Double pitch = (Double) locationNode.item("pitch").getValue();
+        Number yaw   = (Number) locationNode.item("yaw").getValue();
+        Number pitch = (Number) locationNode.item("pitch").getValue();
 
         location.setYaw(yaw.floatValue());
         location.setPitch(pitch.floatValue());
-
-        System.out.println("yaw pitch pass");
 
         Vector direction = new Vector();
         ConfigHandler.Node directionNode = locationNode.item("direction");
