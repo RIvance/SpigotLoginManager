@@ -1,1 +1,1 @@
-# NodevSpigotPlug
+# SpigotLoginManager
