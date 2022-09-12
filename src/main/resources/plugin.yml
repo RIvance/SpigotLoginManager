@@ -1,5 +1,5 @@
-name: NodevServerManager
-main: cc.nodev.PlugMain
+name: SpigotLoginManager
+main: org.ivance.PlugMain
 version: 1.0
 author: Ivance
 commands:

@@ -1,6 +1,6 @@
-package cc.nodev.core;
+package org.ivance.core;
 
-import cc.nodev.utils.ConfigHandler;
+import org.ivance.utils.ConfigHandler;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
@@ -11,8 +11,6 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
-
-import static cc.nodev.utils.ConfigHandler.NullObject;
 
 public class ConfigFileSession implements PlayerDataSession {
 
@@ -105,7 +103,7 @@ public class ConfigFileSession implements PlayerDataSession {
 
     @Override
     public boolean isNew(Player player) {
-        return getConfig(player).item("pin").getValue() == NullObject;
+        return getConfig(player).item("pin").getValue() == ConfigHandler.NullObject;
     }
 
     @Override

@@ -1,4 +1,4 @@
-package cc.nodev.utils;
+package org.ivance.utils;
 
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.YamlConfiguration;

@@ -1,4 +1,4 @@
-package cc.nodev.command;
+package org.ivance.command;
 
 import org.bukkit.command.CommandSender;
 import org.jetbrains.annotations.NotNull;

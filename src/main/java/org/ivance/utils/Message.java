@@ -1,4 +1,4 @@
-package cc.nodev.utils;
+package org.ivance.utils;
 
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;

@@ -1,4 +1,4 @@
-package cc.nodev.core;
+package org.ivance.core;
 
 import org.bukkit.GameMode;
 import org.bukkit.Location;

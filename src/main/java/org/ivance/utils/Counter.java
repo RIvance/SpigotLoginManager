@@ -1,4 +1,4 @@
-package cc.nodev.utils;
+package org.ivance.utils;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

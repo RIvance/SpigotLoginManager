@@ -1,33 +1,27 @@
-package cc.nodev.command.player;
+package org.ivance.command.player;
 
-import cc.nodev.command.PlayerCommandInterface;
-import cc.nodev.core.Players;
-import cc.nodev.utils.Message;
+import org.ivance.command.PlayerCommandInterface;
+import org.ivance.core.Players;
+import org.ivance.utils.Message;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
-public enum OpLoginCommand implements PlayerCommandInterface {
+public enum LoginCommand implements PlayerCommandInterface {
     INSTANCE;
     @Override
     public boolean execute(@NotNull Player player, String[] args) {
-        if (!Players.isOp(player)) {
-            String message = Message.error("Only op can use this command");
-            player.sendMessage(message);
-            return true;
-        }
-
         if (args.length == 1) {
-            if (Players.isPlayerLoggedIn(player)) {
-                String message = Message.error("You are already logged in, don't login again");
-                player.sendMessage(message);
-                return true;
-            }
-
             try {
+                if (Players.isPlayerLoggedIn(player)) {
+                    String message = Message.error("You have already logged in, don't login again");
+                    player.sendMessage(message);
+                    return true;
+                }
+
                 if (Players.checkPin(player, Integer.parseInt(args[0]))) {
                     Players.restorePlayerState(player);
-                    player.setOp(true);
+                    player.setOp(false);
                     Players.login(player);
 
                     String message = Message.info("{player} is logged in", player);

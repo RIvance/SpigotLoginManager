@@ -1,9 +1,10 @@
-package cc.nodev.event;
+package org.ivance.event;
 
-import cc.nodev.core.Players;
-import cc.nodev.utils.Message;
+import org.ivance.core.Players;
+import org.ivance.utils.Message;
 import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
+import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -19,11 +20,12 @@ public class JoinListener implements Listener {
         player.setOp(false);
         player.setGameMode(GameMode.SPECTATOR);
 
-        String title = ChatColor.AQUA + "Nodev" + ChatColor.WHITE + "::" + ChatColor.GOLD + "Craft";
-        String subtitle = ChatColor.GREEN + "https://nodev.cc/minecraft";
+        String title = ChatColor.AQUA + "Minecraft" + ChatColor.WHITE + "::" + ChatColor.GOLD + "Server";
+        String subtitle = ChatColor.GREEN + "https://www.example.com";
         player.sendTitle(title, subtitle, 10, 100, 15);
 
-        String message = Message.info("Welcome to {nodev}, {player}", title, player);
+        player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1.0f, 0.0f);
+        String message = Message.info("Welcome to {title}, {player}", title, player);
         player.sendMessage(message);
 
         if (Players.isNewPlayer(player)) {

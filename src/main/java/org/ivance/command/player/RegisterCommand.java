@@ -1,8 +1,8 @@
-package cc.nodev.command.player;
+package org.ivance.command.player;
 
-import cc.nodev.command.PlayerCommandInterface;
-import cc.nodev.core.Players;
-import cc.nodev.utils.Message;
+import org.ivance.command.PlayerCommandInterface;
+import org.ivance.core.Players;
+import org.ivance.utils.Message;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.GameMode;

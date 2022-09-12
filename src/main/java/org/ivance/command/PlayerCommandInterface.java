@@ -1,4 +1,4 @@
-package cc.nodev.command;
+package org.ivance.command;
 
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;

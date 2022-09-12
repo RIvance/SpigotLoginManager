@@ -1,13 +1,13 @@
-package cc.nodev;
+package org.ivance;
 
-import cc.nodev.command.CommandInterface;
-import cc.nodev.command.PlayerCommandInterface;
-import cc.nodev.command.op.SetOpCommand;
-import cc.nodev.command.player.OpLoginCommand;
-import cc.nodev.command.player.LoginCommand;
-import cc.nodev.command.player.LogoutCommand;
-import cc.nodev.command.player.RegisterCommand;
-import cc.nodev.event.JoinListener;
+import org.ivance.command.CommandInterface;
+import org.ivance.command.PlayerCommandInterface;
+import org.ivance.command.server.SetOpCommand;
+import org.ivance.command.player.OpLoginCommand;
+import org.ivance.command.player.LoginCommand;
+import org.ivance.command.player.LogoutCommand;
+import org.ivance.command.player.RegisterCommand;
+import org.ivance.event.JoinListener;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;

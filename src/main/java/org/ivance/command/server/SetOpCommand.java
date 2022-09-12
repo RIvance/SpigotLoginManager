@@ -1,7 +1,8 @@
-package cc.nodev.command.op;
+package org.ivance.command.server;
 
-import cc.nodev.command.PlayerCommandInterface;
-import cc.nodev.utils.Message;
+import org.ivance.command.PlayerCommandInterface;
+import org.ivance.core.Players;
+import org.ivance.utils.Message;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
@@ -11,6 +12,12 @@ public enum SetOpCommand implements PlayerCommandInterface {
     @Override
     public boolean execute(@NotNull Player player, String[] args) {
         if (args.length >= 1) {
+            if (!Players.isOp(player)) {
+                String message = Message.error("Only OP can use this command");
+                player.sendMessage(message);
+                return true;
+            }
+
             Player target = Bukkit.getPlayer(args[0]);
             if (target == null) {
                 String message = Message.error("Player {player} is not exist", Message.playerName(args[0]));
